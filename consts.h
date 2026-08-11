@@ -1,0 +1,2 @@
+#define COLORS 1
+
