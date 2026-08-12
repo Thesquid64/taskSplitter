@@ -372,7 +372,7 @@ int coolPrint(task * taskPtr) {
 	printf("] ");
 
 	if(strcmp(taskPtr->name, " ") != 0) {
-		(COLORS) ? printf("| \033[1;4m\"%s\"\033[0m ", taskPtr->name) : printf("| \"%s\" ", taskPtr->name);
+		(COLORS) ? printf("| \033[1;4m%s\033[0m ", taskPtr->name) : printf("| %s ", taskPtr->name);
 	}
 	
 	time(&timeNow);
@@ -382,7 +382,7 @@ int coolPrint(task * taskPtr) {
 	}
 
 	if(strcmp(taskPtr->desc, " ") != 0) {
-		printf("\n\"%s\"\n", taskPtr->desc);
+		printf("\n%s\n", taskPtr->desc);
 	}
 	
 	timeInfo = *localtime(&taskPtr->creation);

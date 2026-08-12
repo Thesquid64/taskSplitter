@@ -353,8 +353,8 @@ Example :
 
 ```> coolPrint 0```
 
-```0 [1,2] | "taskName" PAST DUE
-"taskDesc"
+```0 [1,2] | taskName PAST DUE
+taskDesc
 
 made 11-08-2026 16:23 due 11-08-2022 16:23
 ```
@@ -469,11 +469,11 @@ If some task requires you to be somewhere, you can create a task named "Be at To
 
 ```FLOW :
 
-0 [1] | "Eat sushi"
+0 [1] | Eat sushi
 made 11-08-2026 16:36 due 18-08-2026 16:36
 _______________________________________________
 
-1 [] | "Be at tokyo"
+1 [] | Be at tokyo
 made 11-08-2026 16:36 due 18-08-2026 16:36
 _______________________________________________
 ```
@@ -482,15 +482,15 @@ And if you need to take luggage for your trip for example you can make a task "T
 
 ```FLOW :
 
-0 [1] | "Eat sushi"
+0 [1] | Eat sushi
 made 11-08-2026 16:36 due 18-08-2026 16:36
 _______________________________________________
 
-1 [2] | "Be at tokyo"
+1 [2] | Be at tokyo
 made 11-08-2026 16:36 due 18-08-2026 16:36
 _______________________________________________
 
-2 [] | "Take luggage"
+2 [] | Take luggage
 made 11-08-2026 16:38 due 18-08-2026 16:38
 _______________________________________________
 ```
