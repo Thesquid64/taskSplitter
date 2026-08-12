@@ -18,7 +18,7 @@ Installation on Windows, Mac OS and other OSes surely is also easy but i havent 
 
 Here are the instructions to install taskSplitter on Linux systems :
 
-Precise instruction for installing dependencies will be shown for Void Linux and Termux.
+Precise instruction for installing dependencies will be shown for Ubuntu, Void Linux and Termux.
 
 Using a different distro ?
 
@@ -45,6 +45,10 @@ taskSplitter has 2 dependencies :
 To install it, you can use the package manager of your linux distro if it is availible.
 Here are some examples :
 
+Ubuntu (apt) (TO BE CHECKED) :
+
+```# apt install libreadline8 libreadline-dev```
+
 Void Linux (xbps) :
 
 ```# xbps-install readline readline-dev```
@@ -62,6 +66,10 @@ To compile (build) taskSplitter you will need two programs :
 
 To install GCC/clang and make :
 
+Ubuntu (apt) (TO BE CHECKED) :
+
+```# apt install gcc make```
+
 Void Linux (xbps):
 
 ```# xbps-install gcc make```
@@ -71,6 +79,10 @@ Termux android (apt) :
 ```$ apt install clang make```
 
 #### Installing git
+
+Ubuntu (apt) (TO BE CHECKED) :
+
+```# apt install git```
 
 Void Linux (xbps):
 
