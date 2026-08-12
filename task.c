@@ -382,7 +382,7 @@ int coolPrint(task * taskPtr) {
 	}
 
 	if(strcmp(taskPtr->desc, " ") != 0) {
-		printf("\n%s\n", taskPtr->desc);
+		(COLORS) ? printf("\n\033[2m%s\033[0m\n", taskPtr->desc) : printf("\n%s\n", taskPtr->desc);
 	}
 	
 	timeInfo = *localtime(&taskPtr->creation);
