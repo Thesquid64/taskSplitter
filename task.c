@@ -9,9 +9,9 @@
 
 #define STB_DS_IMPLEMENTATION
 #include "stb_ds.h"
- 
+
 int initFreeTask(task * taskList[], task ** taskPtrRef) {
-	
+
 	int i;
 
 	if(taskList == NULL) return E_INVALID_TASKLIST_PTR;
@@ -28,7 +28,7 @@ int initFreeTask(task * taskList[], task ** taskPtrRef) {
 }
 
 int findFreeTask(task * taskList[], task ** taskPtrRef) {
-	
+
 	int i;
 
 	if(taskList == NULL) return E_INVALID_TASKLIST_PTR;
@@ -44,7 +44,7 @@ int findFreeTask(task * taskList[], task ** taskPtrRef) {
 }
 
 int initTaskByRef(task ** taskPtrRef) {
-	
+
 	int i;
 
 	*taskPtrRef = malloc(sizeof(task));
@@ -53,7 +53,7 @@ int initTaskByRef(task ** taskPtrRef) {
 
 	strcpy((*taskPtrRef)->name, " ");
 	strcpy((*taskPtrRef)->desc, " ");
-	
+
 	// Init all dependencies at none
 	for(i=0; i<MAX_DEPENDENCIES; i++) {
 		(*taskPtrRef)->dependencies[i] = -1;
@@ -102,14 +102,14 @@ int printTask(task * taskPtr, FILE * outFile) {
 	else {
 		fprintf(outFile, "name:\"%s\"\n", taskPtr->name);
 	}
-	
+
 	if(strcmp(taskPtr->desc, "") == 0) {
 		fprintf(outFile, "desc:\" \"\n");
 	}
 	else {
 		fprintf(outFile, "desc:\"%s\"\n", taskPtr->desc);
 	}
-	
+
 	fprintf(outFile, "dependencies:");
 	fprintf(outFile, "[");
 
@@ -181,9 +181,9 @@ int loadTaskList(task * taskList[], int * nextId, FILE * filePtr) {
 	if(filePtr == NULL) return E_INVALID_FILE_PTR;
 
 	fscanf(filePtr, "nextId:%d\n", nextId);
-	
+
 	for(i=0; i<MAX_LOADED_TASKS; i++) {
-		
+
 		initTaskByRef(&taskList[i]);
 		if(readTask(taskList[i], filePtr) != E_OK) {
 			taskList[i] = NULL;
@@ -194,7 +194,7 @@ int loadTaskList(task * taskList[], int * nextId, FILE * filePtr) {
 }
 
 int setNextTaskId(task * taskPtr, int * nextId) {
-	
+
 	if(taskPtr == NULL) return E_INVALID_TASK_PTR;
 	if(nextId == NULL) return E_INVALID_INT_PTR;
 
@@ -291,7 +291,7 @@ int removeTaskById(task * taskList[], int taskId) {
 }
 
 int taskIndexById(task * taskList[], int taskId, int * taskIndex) {
-	
+
 	int i;
 
 	if(taskList == NULL) return E_INVALID_TASKLIST_PTR;
@@ -307,7 +307,7 @@ int taskIndexById(task * taskList[], int taskId, int * taskIndex) {
 }
 
 int taskPtrById(task * taskList[], int taskId, task ** taskPtrRef) {
-	
+
 	int i;
 
 	if(taskList == NULL) return E_INVALID_TASKLIST_PTR;
@@ -343,7 +343,7 @@ int setDueTask(task * taskPtr, int day, int month, int year, int hour, int minut
 	taskPtr->due = epoch_time;
 
 	return E_OK;
-	
+
 }
 
 int coolPrint(task * taskPtr) {
@@ -356,25 +356,25 @@ int coolPrint(task * taskPtr) {
 
 	(COLORS) ? printf("\033[7m%d\033[0m ", taskPtr->id) : printf("%d ", taskPtr->id);
 
-	printf("[");
+		printf("[");
 
-	i = 0;
-	while(taskPtr->dependencies[i] == -1) {
-		i++;
-	}
-	if(i < MAX_DEPENDENCIES) {
-		printf("%d", taskPtr->dependencies[i]);
-		for(i=i+1; i<MAX_DEPENDENCIES; i++) {
-			if(taskPtr->dependencies[i] != -1) printf(",%d", taskPtr->dependencies[i]);
+		i = 0;
+		while(taskPtr->dependencies[i] == -1) {
+			i++;
 		}
-	}
-	
-	printf("] ");
+		if(i < MAX_DEPENDENCIES) {
+			printf("%d", taskPtr->dependencies[i]);
+			for(i=i+1; i<MAX_DEPENDENCIES; i++) {
+				if(taskPtr->dependencies[i] != -1) printf(",%d", taskPtr->dependencies[i]);
+			}
+		}
+
+		printf("] | ");
 
 	if(strcmp(taskPtr->name, " ") != 0) {
-		(COLORS) ? printf("| \033[1;4m%s\033[0m ", taskPtr->name) : printf("| %s ", taskPtr->name);
+		(COLORS) ? printf("\033[1;4m%s\033[0m ", taskPtr->name) : printf("%s ", taskPtr->name);
 	}
-	
+
 	time(&timeNow);
 
 	if(taskPtr->due < timeNow) {
@@ -384,24 +384,26 @@ int coolPrint(task * taskPtr) {
 	if(strcmp(taskPtr->desc, " ") != 0) {
 		(COLORS) ? printf("\n\033[2m%s\033[0m\n", taskPtr->desc) : printf("\n%s\n", taskPtr->desc);
 	}
-	
+
 	timeInfo = *localtime(&taskPtr->creation);
-	
-	printf("\nmade %02d-%02d-%04d %02d:%02d ", 
-	       timeInfo.tm_mday, 
-	       timeInfo.tm_mon + 1, 
-	       timeInfo.tm_year + 1900, 
-	       timeInfo.tm_hour, 
-	       timeInfo.tm_min);
+
+	if(strcmp(taskPtr->desc, " ") == 0) printf("\n");
+
+	printf("made %02d-%02d-%04d %02d:%02d ", 
+			timeInfo.tm_mday, 
+			timeInfo.tm_mon + 1, 
+			timeInfo.tm_year + 1900, 
+			timeInfo.tm_hour, 
+			timeInfo.tm_min);
 
 	timeInfo = *localtime(&taskPtr->due);
-	
+
 	printf("due %02d-%02d-%04d %02d:%02d", 
-	       timeInfo.tm_mday, 
-	       timeInfo.tm_mon + 1,     // Month is 0-11
-	       timeInfo.tm_year + 1900, // Year is years since 1900
-	       timeInfo.tm_hour, 
-	       timeInfo.tm_min);
+			timeInfo.tm_mday, 
+			timeInfo.tm_mon + 1,     // Month is 0-11
+			timeInfo.tm_year + 1900, // Year is years since 1900
+			timeInfo.tm_hour, 
+			timeInfo.tm_min);
 
 	printf("\n"); 
 
@@ -410,7 +412,7 @@ int coolPrint(task * taskPtr) {
 }
 
 int reIdTaskList(task * taskList[], int * nextId) {
-	
+
 	int temp = 0;
 	int temp2 = 0;
 

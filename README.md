@@ -355,17 +355,16 @@ Example :
 
 ```0 [1,2] | taskName PAST DUE
 taskDesc
-
 made 11-08-2026 16:23 due 11-08-2022 16:23
 ```
 
 From left to right top to bottom :
 
-- Id (here 0, and the color is inverted)
+- Id (here 0, inverted if COLORS)
 - Dependencies (here 1 and 2)
 - Name (here taskName, empty if name is " ")
 - "PAST DUE" mention if the due time is older than current time
-- Description (here taskDesc, empty if description is " ")
+- Description (here taskDesc, faint if COLORS, empty if description is " ")
 - Creation date (DD-MM-YYYY hh:mm)
 - Due date (DD-MM-YYYY hh:mm)
 
