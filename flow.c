@@ -4,6 +4,7 @@
 #include "task.h"
 #include "consts.h"
 #include "errors.h"
+#include "flow.h"
 
 int flowSort(task * taskList[]) {
 
@@ -25,21 +26,22 @@ int flowSort(task * taskList[]) {
 		}
 	}
 
-	// Put tasks A dependent on B before B
+	// Put dependency B dependent on A before A
 	
 	for(i=0; i<MAX_LOADED_TASKS; i++) { // for each task
 		if(taskList[i] == NULL) continue;
-		for(j=i+1; j<MAX_LOADED_TASKS; j++) { // we search the first dependency of the task before the task
+		for(j=i+1; j<MAX_LOADED_TASKS; j++) { // we search the first dependency of the task sorted after the task
 			if(taskList[j] == NULL) continue;
 			for(k=0; k<MAX_DEPENDENCIES; k++) {
-				if(taskList[j]->dependencies[k] == taskList[i]->id) { // If a dependency (first in taskList) is at j
-					for(l=j; l>i; l--) { // we bubble down the dependency under the task
+				if(taskList[j]->dependencies[k] == taskList[i]->id) { // If dependency B of A
+					for(l=i; l<j; l++) { // we bubble down the dependency under the task
 						tempTaskPtr = taskList[l];
-                    				taskList[l] = taskList[l-1];
-                    				taskList[l-1] = tempTaskPtr; 
+                    				taskList[l] = taskList[l+1];
+                    				taskList[l+1] = tempTaskPtr; 
 					}
 
-					i--; // As we moved i we need to recheck the dependencies at i
+					j++; // As we moved j down in list we need to recheck the dependencies at j++
+					i--; // i got down 1 in list because its depenency moved under i
 					goto rescan; // We already moved the dependency so we move on
 				}
 			}
