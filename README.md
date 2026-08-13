@@ -207,6 +207,16 @@ Example :
 
 ---
 
+#### help
+
+Print a list of availible commands (taskCli commands only)
+
+ex :
+
+\> help
+
+---
+
 #### addTask
 
 The addTask command adds a new task with an id starting at 0 and increments the nextId variable (so that the next task has id 1, the next 2 and so on).

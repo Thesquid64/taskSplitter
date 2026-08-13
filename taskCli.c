@@ -12,8 +12,8 @@
 
 int taskCli(int argc, char * argv[], task * taskList[], int * nextId, FILE * filePtr) {
 
-	//                 0       8      15     22    28    34        44   49   54   59  63       72   77    83   
-	char commands[] = "addTask-rmTask-addDep-rmDep-print-coolPrint-flow-name-desc-due-flowSort-reId-clear-search";
+	//                 0       8      15     22    28    34        44   49   54   59  63       72   77    83     90   
+	char commands[] = "addTask-rmTask-addDep-rmDep-print-coolPrint-flow-name-desc-due-flowSort-reId-clear-search-help";
 
 	int fileSet = 1;
 	int currArgIndex = 1;
@@ -413,6 +413,26 @@ int taskCli(int argc, char * argv[], task * taskList[], int * nextId, FILE * fil
 				currArgIndex += 2;
 
 				break;
+
+			case 90 :
+
+				printf("Availible commands :\n\
+\n\
+	- addTask : Adds a task with auto incrementing id number\n\
+	- rmTask taskId : Removes the task \"taskId\"\n\
+	- addDep taskId depId : Adds the task \"depId\" as a dependency of task taskId\n\
+	- rmDep taskId depId : Removes the task \"depId\" as a dependency of task taskId\n\\n\
+	- print taskId : Print info about task taskId as written in the savefile\n\
+	- coolPrint taskId : Print info about a task taskId in a readable way\n\
+	- flow : Print all tasks with coolPrint style ordered by due date asc (top to bottom) and with dependencies under their mother task \n\
+	- name taskId taskName : Sets the name of task taskId as taskName\n\
+	- desc taskId taskDesc : Sets the description of task taskId as tasskDesc\n\
+	- due taskId [[+]Ya] [[+]Mb] [[+]Dc] [[+]hd] [[+]me] : Sets the due date of task taskId with year a, month b, day c, hour d, minutes e\n\
+	- flowSort : Sorting of flow without printing\n\
+	- reId : Rearranges the id of all tasks\n\
+	- clear : Clears the screen\n\
+	- search yourSearch : Prints tasks that contain yourSearch with coolPrint style\n\
+	- help : Print this help");
 
 			default :
 
