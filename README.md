@@ -169,6 +169,8 @@ You will be prompted with "> "
 
 Here are the 3 specific commands to cliMenu. They do not work in the cli.
 
+- new  \[filepath\] : Create and opens a new file at "filepath" (ex: new myTaskFile).
+
 - open \[filepath\] : Opens the file at "filepath" (ex: open myTaskFile).
 
 - save : Saves the file but doesn't close it.

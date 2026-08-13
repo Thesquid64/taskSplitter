@@ -17,8 +17,8 @@ int cliMenu(task * taskList[], int * nextId) {
 	char * input;
 	int err;
 
-	//                 0    5     11   16
-	char commands[] = "open-close-quit-exit";
+	//                 0    5     11   16   21
+	char commands[] = "open-close-quit-exit-new";
 	char filePath[MAX_PATH_LEN];  
 
 	int fileDescriptor;
@@ -72,6 +72,20 @@ int cliMenu(task * taskList[], int * nextId) {
 			case 16 :
 
 				exitCheck = 1;
+
+				break;
+
+			case 21 :
+
+				sscanf(input, "new%s", filePath);
+				if(strcmp(filePath, "") == 0) {
+					printf("No name specified\n");
+					break;
+				}
+				filePtr = fopen(filePath, "w");
+				freopen(filePath, "r+", filePtr);
+				loadTaskList(taskList, nextId, filePtr);
+				printf("New file opened\n");
 
 				break;
 
