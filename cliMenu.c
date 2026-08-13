@@ -17,8 +17,8 @@ int cliMenu(task * taskList[], int * nextId) {
 	char * input;
 	int err;
 
-	//                 0    5     11   16   21
-	char commands[] = "open-close-quit-exit-new";
+	//                 0    5     11   16   21  25
+	char commands[] = "open-close-quit-exit-new-save";
 	char filePath[MAX_PATH_LEN];  
 
 	int fileDescriptor;
@@ -86,6 +86,21 @@ int cliMenu(task * taskList[], int * nextId) {
 				freopen(filePath, "r+", filePtr);
 				loadTaskList(taskList, nextId, filePtr);
 				printf("New file opened\n");
+
+				break;
+
+			case 25 :
+
+				fflush(filePtr);
+				fileDescriptor = fileno(filePtr);
+				ftruncate(fileDescriptor, 0);
+				rewind(filePtr);
+
+				// Save changes
+				saveTaskList(taskList, nextId, filePtr);
+				fflush(filePtr);
+
+				printf("File saved\n");
 
 				break;
 

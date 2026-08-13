@@ -12,8 +12,8 @@
 
 int taskCli(int argc, char * argv[], task * taskList[], int * nextId, FILE * filePtr) {
 
-	//                 0       8      15     22    28    34        44   49   54   59  63       72   77    83   88 
-	char commands[] = "addTask-rmTask-addDep-rmDep-print-coolPrint-flow-name-desc-due-flowSort-reId-clear-save-search";
+	//                 0       8      15     22    28    34        44   49   54   59  63       72   77    83   
+	char commands[] = "addTask-rmTask-addDep-rmDep-print-coolPrint-flow-name-desc-due-flowSort-reId-clear-search";
 
 	int fileSet = 1;
 	int currArgIndex = 1;
@@ -393,23 +393,6 @@ int taskCli(int argc, char * argv[], task * taskList[], int * nextId, FILE * fil
 				break;
 
 			case 83 :
-
-				fflush(filePtr);
-				fileDescriptor = fileno(filePtr);
-				ftruncate(fileDescriptor, 0);
-				rewind(filePtr);
-
-				// Save changes
-				saveTaskList(taskList, nextId, filePtr);
-				fflush(filePtr);
-
-				printf("File saved\n");
-
-				currArgIndex++;
-
-				break;
-
-			case 88 :
 
 				if(currArgIndex +1 >= argc) {
 					printf("Not enough arguments for search\n");
