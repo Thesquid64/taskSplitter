@@ -404,6 +404,8 @@ Then
 
 Then it prints all of the tasks in this order using coolPrint, and separating with dashes ('-').
 
+If supported, the titlebar and dashes are made the width of the terminal window, else 47 chars.
+
 Example :
 
 ```> flow```
@@ -423,13 +425,16 @@ Example :
 #### search yourSearch
 
 This command will coolPrint all the tasks (in flow's style)that contain yourSearch in their name.
-If i want a list of all tasks with literal "pizza" in their name, i would do :
+If i want a list of all  tasks with literal "pizza" in their name, i would do :
 
 ```> search pizza```
 
 If i want a list of all tasks with literal "my pizza" in their name (with spaces), i would do :
 
 ```> search "my pizza"```
+
+The tasks are printed with the coolPrint style.
+If supported, the titlebar and dashes are made the width of the terminal window, else 47 chars.
 
 ---
 

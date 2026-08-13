@@ -2,6 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/ioctl.h>
 
 #include "taskCli.h"
 #include "task.h"
@@ -17,13 +18,15 @@ int taskCli(int argc, char * argv[], task * taskList[], int * nextId, FILE * fil
 
 	int fileSet = 1;
 	int currArgIndex = 1;
-	int temp, temp2;
+	int temp, temp2, i;
 	task * tempTaskPtr;
 	task * tempTaskPtr2;
 	task ** tempTaskPtrRef;
 	int fileDescriptor;
 	char tempStr[TASK_DESC_LEN];
 	int err;
+	int cols;
+	struct winsize w;
 
 	int datePlus, dateMinus;
 	time_t tempTime;
@@ -399,13 +402,26 @@ int taskCli(int argc, char * argv[], task * taskList[], int * nextId, FILE * fil
 					return 1;
 				}
 
-				(COLORS) ? printf("\n\033[7mSEARCH RESULTS :                               \033[0m\n\n") : printf("\nSEARCH RESULTS :                               \n\n");
+    				ioctl(0, TIOCGWINSZ, &w);
+    				w.ws_col != 0 ? cols = w.ws_col : (cols = 47);
+
+				printf("\n");
+				if(COLORS) printf("\033[7m");
+				printf("SEARCH RESULTS :");
+				for(i=0; i<cols-16; i++) {
+					printf(" ");
+				}
+				if(COLORS) printf("\033[0m");
+				printf("\n");
+				printf("\n");
 
 				for(temp=0; temp<MAX_LOADED_TASKS; temp++) {
 					if(taskList[temp] != NULL && strstr(taskList[temp]->name, argv[currArgIndex + 1]) != NULL) {
 						coolPrint(taskList[temp]);	
 
-						printf("_______________________________________________");
+						for(i=0; i<cols; i++) {
+							printf("_");
+						}
 						printf("\n\n");
 					}
 				}
@@ -433,6 +449,8 @@ int taskCli(int argc, char * argv[], task * taskList[], int * nextId, FILE * fil
 	- clear : Clears the screen\n\
 	- search yourSearch : Prints tasks that contain yourSearch with coolPrint style\n\
 	- help : Print this help");
+
+				break;
 
 			default :
 

@@ -1,3 +1,6 @@
+#include <sys/ioctl.h>
+#include <stdio.h>
+
 #include "task.h"
 #include "consts.h"
 #include "errors.h"
@@ -50,15 +53,31 @@ rescan: ;
 
 int flowPrint(task * taskList[]) {
 
-	int i;
-	
-	(COLORS) ? printf("\n\033[7mFLOW :                                         \033[0m\n\n") : printf("\nFLOW :                                         \n\n");
+	int i, j;
+	int cols;
+
+	struct winsize w;
+    	ioctl(0, TIOCGWINSZ, &w);
+    	w.ws_col != 0 ? cols = w.ws_col : (cols = 47);
+
+	printf("\n");
+	if(COLORS) printf("\033[7m");
+	printf("FLOW :");
+	for(j=0; j<cols-6; j++) {
+		printf(" ");
+	}
+	if(COLORS) printf("\033[0m");
+	printf("\n");
+	printf("\n");
 
 	for(i=0; i<MAX_LOADED_TASKS; i++) {
 		if(taskList[i] != NULL) {
 			coolPrint(taskList[i]);	
 
-			printf("_______________________________________________");
+			for(j=0; j<cols; j++) {
+				printf("_");
+			}
+
 			printf("\n\n");
 		}
 	}
