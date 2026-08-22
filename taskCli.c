@@ -437,7 +437,7 @@ int taskCli(int argc, char * argv[], task * taskList[], int * nextId, FILE * fil
 	- addTask : Adds a task with auto incrementing id number\n\
 	- rmTask taskId : Removes the task \"taskId\"\n\
 	- addDep taskId depId : Adds the task \"depId\" as a dependency of task taskId\n\
-	- rmDep taskId depId : Removes the task \"depId\" as a dependency of task taskId\n\\n\
+	- rmDep taskId depId : Removes the task \"depId\" as a dependency of task taskId\n\
 	- print taskId : Print info about task taskId as written in the savefile\n\
 	- coolPrint taskId : Print info about a task taskId in a readable way\n\
 	- flow : Print all tasks with coolPrint style ordered by due date asc (top to bottom) and with dependencies under their mother task \n\
@@ -448,7 +448,7 @@ int taskCli(int argc, char * argv[], task * taskList[], int * nextId, FILE * fil
 	- reId : Rearranges the id of all tasks\n\
 	- clear : Clears the screen\n\
 	- search yourSearch : Prints tasks that contain yourSearch with coolPrint style\n\
-	- help : Print this help");
+	- help : Print this help\n");
 
 				break;
 
