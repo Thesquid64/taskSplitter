@@ -45,7 +45,7 @@ taskSplitter has 2 dependencies :
 To install it, you can use the package manager of your linux distro if it is availible.
 Here are some examples :
 
-Ubuntu (apt) (TO BE CHECKED) :
+Ubuntu (apt) :
 
 ```# apt install libreadline8 libreadline-dev```
 
@@ -66,7 +66,7 @@ To compile (build) taskSplitter you will need two programs :
 
 To install GCC/clang and make :
 
-Ubuntu (apt) (TO BE CHECKED) :
+Ubuntu (apt) :
 
 ```# apt install gcc make```
 
@@ -80,7 +80,7 @@ Termux android (apt) :
 
 #### Installing git
 
-Ubuntu (apt) (TO BE CHECKED) :
+Ubuntu (apt) :
 
 ```# apt install git```
 
