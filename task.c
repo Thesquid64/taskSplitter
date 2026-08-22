@@ -180,6 +180,8 @@ int loadTaskList(task * taskList[], int * nextId, FILE * filePtr) {
 	if(nextId == NULL) return E_INVALID_INT_PTR;
 	if(filePtr == NULL) return E_INVALID_FILE_PTR;
 
+	*nextId = 0;
+
 	fscanf(filePtr, "nextId:%d\n", nextId);
 
 	for(i=0; i<MAX_LOADED_TASKS; i++) {
