@@ -112,7 +112,7 @@ Build using make :
 
 ```$ make```
 
-Or install system-wide :
+Or install system-wide (in $PREFIX/bin for termux and in /bin for other distros):
 
 ```# make install```
 

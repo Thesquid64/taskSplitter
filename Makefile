@@ -1,25 +1,39 @@
-all: main.c task.o flow.o taskCli.o cliMenu.o
-	gcc main.c task.o flow.o taskCli.o cliMenu.o -o taskSplitter -g -lreadline
+NAME = taskSplitter
+CC = gcc
+CFLAGS = 
+CPPFLAGS = -MMD
+RM = rm -rf
+SRCS = $(wildcard *.c)
+OBJS = $(SRCS:.c=.o)
+DEPS = $(OBJS:.o=.d $(addprefix $(NAME),.d))
+LDLIBS = readline
 
-install: all
-	cp taskSplitter /bin
 
-uninstall:
-	rm /bin/taskSplitter
+all: $(NAME)
 
-task.o: task.c task.h consts.h
-	gcc -g -c task.c -o task.o
-
-flow.o: flow.c flow.h consts.h
-	gcc -g -c flow.c -o flow.o
-
-taskCli.o : taskCli.c taskCli.h consts.h
-	gcc -g -c taskCli.c -o taskCli.o
-
-cliMenu.o : cliMenu.c cliMenu.h consts.h
-	gcc -g -c cliMenu.c -o cliMenu.o 
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) -o $(NAME) $(addprefix -l,$(LDLIBS))
 
 clean:
-	rm *.o > /dev/null 2>&1
-	rm taskSplitter > /dev/null 2>&1
-	rm saves/* > /dev/null 2>&1
+	$(RM) $(OBJS) $(DEPS) $(NAME)
+
+ifneq ($(findstring com.termux,$(PREFIX)),) # Verify if the environnement is termux (if "com.termux" is in $PREFIX)
+install:
+	@echo "Installing (termux detected)"
+	cp $(NAME) $(PREFIX)/bin
+	
+uninstall:
+	@echo "Uninstalling (termux detected)"
+	rm $(PREFIX)/bin/$(NAME)
+else 
+install:
+	@echo "Installing"
+	cp $(NAME) /bin
+uninstall:
+	@echo "Uninstalling"
+	rm /bin/$(NAME)
+endif
+
+-include $(DEPS)
+
+.PHONY: all clean install uninstall
