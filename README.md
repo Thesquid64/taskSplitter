@@ -14,11 +14,11 @@ Also, as you do not have to specify a date as in an agenda and can optionally us
 
 ## Getting started
 
-Installation on Windows, Mac OS and other OSes surely is also easy but i havent had the time to make a guide for it yet !
+Installation on Windows surely is also easy but i havent had the time to make a guide for it yet !
 
-Here are the instructions to install taskSplitter on Linux systems :
+Here are the instructions to install taskSplitter on Linux and MacOS systems :
 
-Precise instruction for installing dependencies will be shown for Ubuntu, Void Linux and Termux.
+Precise instruction for installing dependencies will be shown for MacOS, Ubuntu, Void Linux and Termux.
 
 Using a different distro ?
 
@@ -35,7 +35,17 @@ A quick search online should do the trick (build the dependencies yourself in la
 
 ***'#' means the command is executed with root privileges (search sudo if you dont understand this)***
 
-#### Installing dependencies
+#### MacOS
+
+Install xcode from the Terminal
+
+```$ xcode-select --install```
+
+This will install both Readline, gcc and git 
+
+#### Linux
+
+##### Installing dependencies
 
 taskSplitter has 2 dependencies :
 
@@ -57,7 +67,7 @@ Termux android (apt) :
 
 ```$ apt install readline``` 
 
-#### Installing build tools
+##### Installing build tools
 
 To compile (build) taskSplitter you will need two programs :
 
@@ -78,7 +88,7 @@ Termux android (apt) :
 
 ```$ apt install clang make```
 
-#### Installing git
+##### Installing git
 
 Ubuntu (apt) :
 
@@ -113,6 +123,7 @@ Build using make :
 ```$ make```
 
 Or install system-wide (in $PREFIX/bin for termux and in /bin for other distros):
+System-wide install is not supported on MacOS for now
 
 ```# make install```
 
