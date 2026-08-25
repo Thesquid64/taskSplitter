@@ -18,7 +18,7 @@ clean:
 	$(RM) $(OBJS) $(DEPS) $(NAME)
 
 ifneq ($(findstring com.termux,$(PREFIX)),) # Verify if the environnement is termux (if "com.termux" is in $PREFIX)
-install:
+install: all
 	@echo "Installing (termux detected)"
 	cp $(NAME) $(PREFIX)/bin
 	
@@ -26,7 +26,7 @@ uninstall:
 	@echo "Uninstalling (termux detected)"
 	rm $(PREFIX)/bin/$(NAME)
 else 
-install:
+install: all
 	@echo "Installing"
 	cp $(NAME) /bin
 uninstall:
